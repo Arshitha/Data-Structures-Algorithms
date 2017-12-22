@@ -1,0 +1,35 @@
+** MyBloomFilter.h **
+MyBloomFilter.h, inherits the provided BloomFilter.h header file. In MyBloomFilter class, in addition to the member functions of 
+BloomFilter class, two more function definitions (hash functions) along with a vector (Bloom Filter Bit Map) were declared. All
+of them under the public access specifier.
+
+** MyBloomFilter.cpp **
+This file contains the implementations of the functions declared in MyBloomFilter.h. 
+        a. Hash Function 1 logic:
+            m=18593; (large prime number)
+            powers of 256 are the weights for each character.
+            p = Number of bits in the bloom filter, i.e., FilterArr
+
+            The hash function takes an input as the string  and gives an integer as the output. The output integer is 
+            the index of the Bloom Filter (FilterArr) that needs to be set to 1. 
+
+            Basically, the hash function splits the string into characters (which are then converted to integers) and performs 
+            modular operation on each char with a large prime number. In order to take care of the order 
+            in which the characters occur, each character is given a weigth before perform the modulo operation. 
+
+            Each character's modulo output is summed with the previous modulo operation.
+
+            This sum is then modulo-ed with the length*8 bits of the bloom filter array.
+
+            This sum is nothing but the index value of FilterArr (bloom filter bit map) that'll be set to 1.
+
+        b. Hash Function 2 logic is same as that of Hash Function 1. Only the parameters differ. 
+            m=125639; (large prime number)
+            powers of 256 are the weights for each character.
+            p = Number of bits in the bloom filter, i.e., FilterArr
+
+
+The other functions are self-explanatory. 
+
+
+

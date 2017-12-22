@@ -1,0 +1,75 @@
+LONGEST COMMON SUBSEQUENCE
+
+LOGIC DESCRIPTION:
+Given any two strings, to find the longest common subsequence, one of the approaches that we can use is recursion. 
+
+If str1 is 'm' characters long and  str2 is 'n' characters long then L(str1[0..m-1], str2[0..n-1]) gives the length
+of the longest subsequence. 
+
+If last characters of both strings match (i.e, str1[m-1] == str2[n-1]) then
+L(str1[0..m-1], str2[0..n-1]) = 1 + (str1[0..m-2], str2[0..n-2])
+
+If last characters of both sequences do not match (or str1[m-1] != str2[n-1]) then
+L(str1[0..m-1], str2[0..n-1]) = MAX ( L(str1[0..m-2], str2[0..n-1]), L(str1[0..m-1], str2[0..n-2])
+
+It implies that this problem has the optimal substructure property. In computer science, 
+a problem is said to have optimal substructure if an optimal solution can be constructed from optimal 
+solutions of its subproblems.
+
+However, using recursion we'd be repeatedly solving for the same subproblem because of which we get 
+a runtime of O(2^n) which is very inefficient. Since we need to solve for the same subproblem more than 
+once it has the property of overlapping subproblems. 
+
+Since this problem has both optimal subproblems and overlapping subproblems we can use dynammic programming, 
+that is, for each subproblem that is solved we can remember it's solution by memoization or tabulation.
+
+This problem involes comparing two strings and keeping count of common character occurences in the same 
+relative order, tabulation method is used. 
+
+PSEUDO CODE [ALGORITHM DESCRIPTION]:
+
+string findMaxSubSeq(string str1, string str2){
+    m = length.str1;
+    n = length.str2;
+
+    table[m+1][n+1]; 
+
+    for(i to m){
+        for(j to n){
+            
+            zeroth columns of every row is set to 0
+            zeroth rows of every column is set to 0
+
+            
+            if (str1[i] == str2[j])
+                table[i][j] = table[i-1][j-1] + 1             [comments: If characters in both strings match,
+                                                                        checks for no. of matchs uptil the 
+                                                                        previous characters of the last iteration
+                                                                        in order to avoid repeated counting of 
+                                                                        same matches]
+            else
+                table[i][j] = max(table[i-1][j], table[i][j-1])
+
+        }
+    }
+
+    maxLenSubseq = table[m][n]
+}
+
+To print the subseq, we need to traverse the table from the last element (i.e., table[m][n]). If last characters of both
+strings match (i.e., str1[m-1]==str2[n-1]) then move diagonally up to table[m-1][n-1]. Store this character in 
+a string variable.
+
+In case of mismatch, check for the max(table[i-1][j], table[i][j-1]) and move in the direction of max. element. 
+
+Again, check for a match, else repeat the same until 0 is reached in the table. 
+
+Since we traversed from bottom up, the subseq string will be in reverse. So it needs to be reversed and then returned.
+
+RUNTIME:
+
+To find the length of the longest subseq: Theta(m*n)
+To traverse and store the subseq string: Theta(m*n)
+
+Total Runtime: Theta(2*m*n) which asymptotically equal to Theta(m*n)
+

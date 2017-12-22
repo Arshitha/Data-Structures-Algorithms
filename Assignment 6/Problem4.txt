@@ -1,0 +1,28 @@
+**fourA**
+
+The program goes through every character until the end of file. Each time 'U' is found, counter is set to 1 and buid[0] 
+stores zero. It then checks for contiguous 8 digits if it exists, sums them up and if the sum is in the range [31,68]
+then it increments the  idTotal variable. 
+
+However, in my program, I wasn't able to take into the account one of the edge cases because of which the total number of
+BU IDs found are 87822.
+
+**fourC**
+
+The program searches for the longest palindrome by first copying the entire text into a buffer and then checking for each
+substring within the text file for palindrome. 
+
+It consists of four user defined functions, which perform the function of copying the text file, copying the substring, 
+checking for spaces and checking for the longest palindrome. 
+
+Struct called pair is used to store the starting and the ending location of the substring being checked. 
+
+The answer that was returned by the program was as follows:
+207343189 207343200
+" l v r v l "
+
+Length of this palindrome is 11.
+
+
+
+
